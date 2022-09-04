@@ -1,12 +1,13 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[error-msg]'
+  selector: '[error-msg]',
 })
 export class ErrorMsgDirective implements OnInit {
 
 htmlElement: ElementRef<HTMLElement>;
 @Input() color: string = 'red';
+@Input() mensaje: string = 'Complete el campo, por favor';
 
   constructor(private element: ElementRef<HTMLElement>) { 
     this.htmlElement = element;
@@ -15,10 +16,17 @@ htmlElement: ElementRef<HTMLElement>;
 
   ngOnInit(): void {
     this.setColor();
+    this.setMensaje();
     
   }
 
   setColor(): void{
     this.htmlElement.nativeElement.style.color = this.color;
+    this.htmlElement.nativeElement.classList.add('form-text');
+  }
+
+  setMensaje(): void{
+    this.htmlElement.nativeElement.innerHTML = this.mensaje;
+    
   }
 }

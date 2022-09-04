@@ -9,10 +9,10 @@
             <input class="form-control" formControlName="nombre" placeholder="Ingrese el nombre...">
         </div>
         <div class="col-auto">
-            <span class="form-text" 
-            error-msg
-            color="yellow"
-            *ngIf="tieneError('nombre')">Este campo es requerido</span>
+            <span error-msg
+            color="red"
+            mensaje="Debe ingresar algun dato en el campo"
+            *ngIf="tieneError('nombre')"></span>
         </div>
     </div>
     <div class="row">

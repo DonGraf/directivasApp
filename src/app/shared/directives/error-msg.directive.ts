@@ -1,32 +1,41 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[error-msg]',
 })
+
 export class ErrorMsgDirective implements OnInit {
 
-htmlElement: ElementRef<HTMLElement>;
-@Input() color: string = 'red';
-@Input() mensaje: string = 'Complete el campo, por favor';
+  private _color: string = 'red';
+  private _mensaje: string = 'Este campo es requerido';
 
-  constructor(private element: ElementRef<HTMLElement>) { 
-    this.htmlElement = element;
+  htmlElement: ElementRef<HTMLElement>;
+  @Input() set color (valor : string){
+    this._color = valor;
+    this.setColor();
+  };
+  @Input() set mensaje (valor: string){
+    this._mensaje = valor;
+    this.setMensaje();
+  }
 
+  constructor( private el: ElementRef<HTMLElement> ) { 
+    this.htmlElement = el;
   }
 
   ngOnInit(): void {
-    this.setColor();
-    this.setMensaje();
-    
-  }
+    this.setEstilo();
+ }
 
-  setColor(): void{
-    this.htmlElement.nativeElement.style.color = this.color;
+  setEstilo(): void{
     this.htmlElement.nativeElement.classList.add('form-text');
   }
 
+  setColor(): void{
+    this.htmlElement.nativeElement.style.color = this._color;
+  }
+
   setMensaje(): void{
-    this.htmlElement.nativeElement.innerHTML = this.mensaje;
-    
+    this.htmlElement.nativeElement.innerText = this._mensaje;
   }
 }

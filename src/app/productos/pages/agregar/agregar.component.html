@@ -19,6 +19,7 @@
             <span error-msg
                   [mensaje]="texto1"
                   [color]="color"
+                  [valido]="!tieneError('nombre')"
                   >
             </span>
         </div>
@@ -29,7 +30,7 @@
     <div class="row mt-3">
         <div class="col">
             <button class="btn btn-primary"
-                    (click)="cambiarNombre()!">
+                    (click)="cambiarNombre()">
                 Guardar
             </button>
 
